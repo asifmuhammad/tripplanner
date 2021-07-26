@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="!isUpdate">
+      Add New Planner
+    </ion-title>
+    <ion-title *ngIf="isUpdate">
+      Update Planner
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-icon name="camera" (click)="loadImage()"></ion-icon>
+  </ion-item>  
+  <ion-card *ngIf="base64Image" color="light" class="ion-text-center">
+    <ion-card-content>
+      <img [src]="base64Image" />
+    </ion-card-content>
+  </ion-card>
+  <ion-item>
+    <ion-label position="stacked">Title</ion-label>
+    <ion-input placeholder="Title" [(ngModel)]="planners.title"></ion-input>
+  </ion-item>
+<ion-item>
+  <ion-label position="stacked">Description</ion-label>
+  <ion-textarea placeholder="Description" [(ngModel)]="planners.description"></ion-textarea>
+</ion-item>
+    <ion-button *ngIf="!isUpdate" expand="block" (click)="submitForm()">Add Planner</ion-button>
+    <ion-button *ngIf="isUpdate" expand="block" color="success" (click)="submitForm()">Update Planner</ion-button>
+    <ion-button *ngIf="isUpdate" expand="block" color="danger" (click)="deletePlanner()">Delete</ion-button>
+</ion-content>

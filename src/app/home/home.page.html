@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+  <ion-content class="card-background-page">
+    <!-- Skeleton screen -->
+<div *ngIf="!postsData">
+  <div class="ion-padding custom-skeleton">
+    <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+    <ion-skeleton-text animated></ion-skeleton-text>
+    <br/>
+    <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+    <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+    <br/>
+    <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+    <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+    <br/>
+    <ion-skeleton-text animated></ion-skeleton-text>
+    <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+    <br/>
+    <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+    <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+  </div>
+</div>
+<!-- End -->
+<div *ngIf="postsData">
+
+    <ion-item lines="none">
+      <ion-icon slot="end" name="add-outline" (click)="goToAdd()"></ion-icon>
+    </ion-item>
+    <ion-item lines="none" *ngIf="posts.length == 0">    
+      <ion-label style="text-align: center;" >No Record found</ion-label>
+    </ion-item>
+    <ion-card *ngFor="let planner of posts;let i = index">
+      <img [src]="planner.filepath"/>
+      <div class="card-icon">
+        <ion-icon (click)="goToUpdate(planner.id)" style="float: left" name="create-outline"></ion-icon>
+        <ion-icon *ngIf="isBookmarked(planner.bookmarks)" name="star" style="float: right;" (click)="toggleBookmark(planner)"></ion-icon>
+        <ion-icon style="float: right;" *ngIf="!isBookmarked(planner.bookmarks)" name="star-outline" (click)="toggleBookmark(planner)"></ion-icon>
+      </div>
+      <div class="card-title">{{planner.title}}</div>
+      <!-- <div class="card-subtitle">41 Listings</div> -->
+      <ion-card-content style="text-align: start;">
+        {{planner.description}}
+      </ion-card-content>
+    </ion-card>
+  </div>
+  </ion-content>

@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Favorites</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="card-background-page">
+  <div *ngIf="!postsData">
+    <div class="ion-padding custom-skeleton">
+      <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+      <ion-skeleton-text animated></ion-skeleton-text>
+      <br/>
+      <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+      <br/>
+      <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+      <br/>
+      <ion-skeleton-text animated></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+      <br/>
+      <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+    </div>
+  </div>
+  <div *ngIf="postsData">
+    <ion-item lines="none" *ngIf="bookmarkedPosts.length == 0">    
+      <ion-label style="text-align: center;" >No Record found</ion-label>
+    </ion-item>
+  <ion-card *ngFor="let planner of bookmarkedPosts">
+    <img [src]="planner.filepath"/>
+    <!-- <div class="card-icon"><ion-icon style="float: left" name="create-outline"></ion-icon><ion-icon style="float: right;" name="star"></ion-icon></div> -->
+    <div class="card-title">{{planner.title}}</div>
+    <!-- <div class="card-subtitle">41 Listings</div> -->
+    <ion-card-content style="text-align: start;">
+      {{planner.description}}
+    </ion-card-content>
+  </ion-card>
+</div>
+</ion-content>

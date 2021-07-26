@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true" slot="fixed" >
+    <div class="card">
+      <div class="header" (click)="loadImage()">
+        <div class="avatar">
+          <img *ngIf="base64Image ===''" src="../../assets/img/player104.png" alt="">   
+          <img *ngIf="base64Image!==''" [src]="base64Image" />       
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="user-meta ion-text-center">
+          <ion-item lines="full">
+            <ion-label position="floating">Full Name</ion-label>
+            <ion-input [ngModelOptions]="{standalone: true}" [(ngModel)]="data.displayName" type="text" required></ion-input>
+          </ion-item>
+      
+          <ion-item lines="full">
+            <ion-label position="floating">Email</ion-label>
+            <ion-input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="data.email" required></ion-input>
+          </ion-item>
+      
+          <ion-item lines="full">
+            <ion-label position="floating">Password</ion-label>
+            <ion-input [(ngModel)]="data.password" [ngModelOptions]="{standalone: true}" type="password" required></ion-input>
+          </ion-item>        
+        <ion-button type="button" color="danger" expand="block" (click)="submit()">SignUp</ion-button>
+        </div>
+      </div>
+    </div>
+</ion-content>

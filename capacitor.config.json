@@ -1,0 +1,6 @@
+{
+  "appId": "com.tripplanner.com",
+  "appName": "Tripplanner",
+  "webDir": "www",
+  "npmClient": "npm"
+}
