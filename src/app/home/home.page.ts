@@ -7,13 +7,14 @@ import { PlannerService } from '../shared/services/plannerService/planner.servic
 import { Post } from '../shared/models/planner';
 import { AuthenticationService } from '../shared/services/authentication-service/authentication.service';
 import { SharedService } from '../shared/services/sharedService/shared.service';
+//two-way binding
 export interface MyData {
-  id:string;
+  id: string;
   filepath: any;
-  title:string;
-  description:string;
-  created_date:any;
-  uid:string;
+  title: string;
+  description: string;
+  createdDate: any;
+  uid: string;
 }
 @Component({
   selector: 'app-home',
@@ -22,22 +23,23 @@ export interface MyData {
 })
 export class HomePage implements OnInit {
 
-  planners:any[]=[];
-  sub:any;
-  referance:any;
+  planners: any[]=[];
+  sub: any;
+  referance: any;
   currentUser: any;
-  isFavrit:boolean=false;
-  postsSubscription: Subscription;  
+  isFavrit=false;
+  postsSubscription: Subscription;
   posts: Post[] = [];
   postsData=false;
   private plannerCollection: AngularFirestoreCollection<MyData>;
-  constructor(private route: Router,private database: AngularFirestore,public authentication: AuthenticationService, private sharedService:SharedService, private plannerService:PlannerService) {    
+  constructor(private route: Router,private database: AngularFirestore,public authentication: AuthenticationService,
+              private sharedService: SharedService, private plannerService: PlannerService) {
 
    }
 
   ngOnInit() {
   }
-  ionViewWillEnter(){    
+  ionViewWillEnter(){
     this.loadRelatedPosts();
   }
   async loadRelatedPosts() {
@@ -45,16 +47,16 @@ export class HomePage implements OnInit {
     this.postsSubscription = this.plannerService.getRelatedPosts().subscribe(posts => {
       this.postsData=true;
       this.posts = posts;
-      console.log("Related Post",this.posts);
+      console.log('Related Post',this.posts);
     }, error => {
       console.error('HomePage -> ngOnInit -> error', error);
     });
   }
   goToAdd(){
-this.route.navigate(['tabs/add-planner'])
+this.route.navigate(['tabs/add-planner']);
   }
   goToUpdate(id) {
-    this.route.navigate(['tabs/add-planner'], { queryParams: { id: id } });
+    this.route.navigate(['tabs/add-planner'], { queryParams: { id } });
   }
   async toggleBookmark(post: Post) {
     const isBookmarked = this.isBookmarked(post.bookmarks);

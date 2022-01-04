@@ -1,11 +1,11 @@
 export class AppAccountInfo {
     uid?: string;
-    displayName:string;
+    displayName: string;
     email: string;
     photoURL?: string;
-    emailVerified?:boolean;
+    emailVerified?: boolean;
     favorites?: { [ key: string ]: boolean };
-    created_at?:Date;
+    created_at?: Date;
     password?: string;
 }
- 
+

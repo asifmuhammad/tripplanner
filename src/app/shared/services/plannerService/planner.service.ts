@@ -46,19 +46,14 @@ export class PlannerService {
     return this.mapPosts(posts$);
   }
   getUserPosts(userId: string): Observable<Post[]> {
-    const posts$ = this.afStore.collection('posts', ref => {
-      return ref.where('postBy', '==', userId).orderBy('createdAt', 'desc');
-    }).snapshotChanges();
+    const posts$ = this.afStore.collection('posts', ref => ref.where('postBy', '==', userId)
+      .orderBy('createdAt', 'desc')).snapshotChanges();
     return this.mapPosts(posts$);
   }
   private mapPosts(posts$: Observable<DocumentChangeAction<any>[]>): Observable<Post[]> {
     return posts$.pipe(
       debounceTime(300),
-      map(actions => {
-        return actions.map(action => {
-          return { id: action.payload.doc.id, ...action.payload.doc.data() } as Post;
-        });
-      }),
+      map(actions => actions.map(action => ({ id: action.payload.doc.id, ...action.payload.doc.data() } as Post))),
     );
   }
 }

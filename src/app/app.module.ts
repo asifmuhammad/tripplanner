@@ -19,9 +19,9 @@ firebase.initializeApp(environment.firebaseConfig);
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,AngularFireModule.initializeApp(environment.firebaseConfig),
-  AngularFirestoreModule, 
-  AngularFireStorageModule, 
-  AngularFireAuthModule
+  AngularFirestoreModule,
+  AngularFireStorageModule,
+  AngularFireAuthModule,
 ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },AngularFirestoreModule],
   bootstrap: [AppComponent],

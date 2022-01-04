@@ -6,12 +6,12 @@ import { LoadingController, ToastController } from '@ionic/angular';
 })
 export class SharedService {
 
-  constructor(private toastController:ToastController,private loadingController:LoadingController) { }
+  constructor(private toastController: ToastController,private loadingController: LoadingController) { }
   async presentToastMsg(value,color) {
     const toast = await this.toastController.create({
       message: value,
       duration: 2000,
-      color: color,
+      color,
     });
     toast.present();
   }

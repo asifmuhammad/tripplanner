@@ -27,9 +27,10 @@ export class ProfilePage implements OnInit {
 
   }
   ionViewWillEnter() {
-    let currentUser = localStorage.getItem("user");
-    let user = JSON.parse(currentUser);
+    const currentUser = localStorage.getItem('user');
+    const user = JSON.parse(currentUser);
     this.authService.getCurrentAccountInfoObservable(user.uid).subscribe(
+      // eslint-disable-next-line @typescript-eslint/no-shadow
       (currentUser) => {
         this.userData = true;
         this.currentAccountInfo = currentUser;
@@ -44,7 +45,7 @@ export class ProfilePage implements OnInit {
         .getBookmarkedPosts(user.uid)
         .subscribe((posts) => {
           this.bookmarkedPosts = posts;
-          console.log("bookmarked",this.bookmarkedPosts);
+          console.log('bookmarked',this.bookmarkedPosts);
         });
     })();
   }

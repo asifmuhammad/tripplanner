@@ -6,14 +6,10 @@ const routes: Routes = [
     path: '',
     redirectTo: 'start-page',
     pathMatch: 'full'
-  },  
+  },
   {
     path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
-  },
-  {
-    path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
   },
   {
     path: 'login',

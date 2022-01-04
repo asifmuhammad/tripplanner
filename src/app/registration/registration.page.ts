@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { AppAccountInfo } from '../shared/models/app-account-info.model';
 import { AuthenticationService } from '../shared/services/authentication-service/authentication.service';
-import { CameraResultType,CameraOptions, Plugins  } from '@capacitor/core';
 import { LoadingController } from '@ionic/angular';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
-const { Camera } = Plugins;
+// eslint-disable-next-line @typescript-eslint/naming-convention
 
 @Component({
   selector: 'app-registration',
@@ -14,41 +14,42 @@ const { Camera } = Plugins;
   styleUrls: ['./registration.page.scss'],
 })
 export class RegistrationPage implements OnInit {
-  imageURL:any;
-  data :AppAccountInfo = {
+  imageURL: any;
+  data: AppAccountInfo = {
     displayName:'',
     email: '',
     photoURL:'',
     password: '',
   };
   base64Image='';
-  constructor(private authService:AuthenticationService,private storage: AngularFireStorage, private router:Router, private loadingController:LoadingController) { }
+  constructor(private authService:AuthenticationService,private storage: AngularFireStorage, private router: Router, private loadingController: LoadingController) { }
 
   ngOnInit() {
   }
   submit(){
-    this.authService.RegisterUser(this.data)      
+    this.authService.RegisterUser(this.data)
     .then((res) => {
-      this.router.navigate(['login']); 
+      this.router.navigate(['login']);
       // Do something here
     }).catch((error) => {
-      window.alert(error.message)
-    })
+      window.alert(error.message);
+    });
 }
-loadImage() {
-  debugger;
-  const options: CameraOptions = {
-    quality: 100,
+async loadImage() {
+  await Camera.getPhoto({
+    quality: 90,
+    allowEditing: false,
+    source: CameraSource.Prompt,
     resultType: CameraResultType.DataUrl,
-    saveToGallery: true,
-  }
-
-  Camera.getPhoto(options).then((imageData) => {
-    this.base64Image = imageData.dataUrl;
-    this.uploadProfile();
-   }, (err) => {
-     console.log("error",err)
-   });
+  }).then(
+    (imageData) => {
+      this.base64Image = imageData.dataUrl;
+      this.uploadProfile();
+    },
+    (err) => {
+      // Handle error
+    }
+  );
 }
 async uploadProfile() {
   const loading = await this.loadingController.create({

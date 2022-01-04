@@ -5,12 +5,12 @@
 export const environment = {
   production: false,
   firebaseConfig : {
-    apiKey: "AIzaSyBW0dKNOLPQ9ioFa99fR-piHgC4toSM00U",
-    authDomain: "tripplanner-5407c.firebaseapp.com",
-    projectId: "tripplanner-5407c",
-    storageBucket: "tripplanner-5407c.appspot.com",
-    messagingSenderId: "570906459168",
-    appId: "1:570906459168:web:26404cc77fc68465219045"
+    apiKey: "AIzaSyBj5bVUdxWpqE0Yt-u6gUD-9PWGVBNSSso",
+    authDomain: "myionicproject-8d175.firebaseapp.com",
+    projectId: "myionicproject-8d175",
+    storageBucket: "myionicproject-8d175.appspot.com",
+    messagingSenderId: "1039878940369",
+    appId: "1:1039878940369:web:7f682dc37468106eeb87f0"
   }
 };
 

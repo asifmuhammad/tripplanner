@@ -33,18 +33,17 @@
     <ion-item lines="none">
       <ion-icon slot="end" name="add-outline" (click)="goToAdd()"></ion-icon>
     </ion-item>
-    <ion-item lines="none" *ngIf="posts.length == 0">    
+    <ion-item lines="none" *ngIf="posts.length === 0">
       <ion-label style="text-align: center;" >No Record found</ion-label>
     </ion-item>
     <ion-card *ngFor="let planner of posts;let i = index">
       <img [src]="planner.filepath"/>
       <div class="card-icon">
         <ion-icon (click)="goToUpdate(planner.id)" style="float: left" name="create-outline"></ion-icon>
-        <ion-icon *ngIf="isBookmarked(planner.bookmarks)" name="star" style="float: right;" (click)="toggleBookmark(planner)"></ion-icon>
+         <ion-icon *ngIf="isBookmarked(planner.bookmarks)" name="star" style="float: right;" (click)="toggleBookmark(planner)"></ion-icon>
         <ion-icon style="float: right;" *ngIf="!isBookmarked(planner.bookmarks)" name="star-outline" (click)="toggleBookmark(planner)"></ion-icon>
       </div>
-      <div class="card-title">{{planner.title}}</div>
-      <!-- <div class="card-subtitle">41 Listings</div> -->
+      <ion-card-content >{{planner.title}}</ion-card-content>
       <ion-card-content style="text-align: start;">
         {{planner.description}}
       </ion-card-content>

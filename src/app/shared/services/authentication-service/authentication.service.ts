@@ -15,8 +15,8 @@ export class AuthenticationService {
   constructor(
     public afStore: AngularFirestore,
     public ngFireAuth: AngularFireAuth,
-    public router: Router,  
-    public ngZone: NgZone 
+    public router: Router,
+    public ngZone: NgZone
   ) {
     this.ngFireAuth.authState.subscribe(user => {
       if (user) {
@@ -32,14 +32,14 @@ export class AuthenticationService {
 
   // Login in with email/password
   SignIn(email, password) {
-    return this.ngFireAuth.signInWithEmailAndPassword(email, password)
+    return this.ngFireAuth.signInWithEmailAndPassword(email, password);
   }
   // Register user with email/password
   RegisterUser(user) {
     return this.ngFireAuth.createUserWithEmailAndPassword(user.email, user.password).then((res)=>{
-console.log("res",res);
+console.log('res',res);
 this.SetUserData(user,res.user);
-    })
+    });
   }
 
 
@@ -49,8 +49,8 @@ this.SetUserData(user,res.user);
     .then(() => {
       window.alert('Password reset email has been sent, please check your inbox.');
     }).catch((error) => {
-      window.alert(error)
-    })
+      window.alert(error);
+    });
   }
 
 
@@ -59,7 +59,7 @@ this.SetUserData(user,res.user);
   // Store user in localStorage
   SetUserData(user,res) {
     if(res.uid){
-      this.updateProfile(user)
+      this.updateProfile(user);
     }
     const userRef: AngularFirestoreDocument<any> = this.afStore.doc(`users/${res.uid}`);
     const userData: AppAccountInfo = {
@@ -68,16 +68,16 @@ this.SetUserData(user,res.user);
       displayName: user.displayName,
       photoURL: user.photoURL,
       emailVerified: res.emailVerified
-    }
+    };
     return userRef.set(userData, {
       merge: true
-    })
+    });
   }
   async updateProfile(val) {
     const profile = {
         displayName: val.displayName,
         photoURL: val.photoURL
-    }
+    };
     return (await this.ngFireAuth.currentUser).updateProfile(profile);
 }
  getCurrentAccountInfoObservable(userId): Observable<AppAccountInfo> {
@@ -89,12 +89,12 @@ this.SetUserData(user,res.user);
     throw new Error(error);
   }
 }
-  // Sign-out 
+  // Sign-out
   SignOut() {
     return this.ngFireAuth.signOut().then(() => {
       localStorage.removeItem('user');
       this.router.navigate(['login']);
-    })
+    });
   }
 
 }

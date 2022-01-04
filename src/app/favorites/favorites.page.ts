@@ -6,12 +6,12 @@ import { LoadingController } from '@ionic/angular';
 import { Post } from '../shared/models/planner';
 import { PlannerService } from '../shared/services/plannerService/planner.service';
 export interface MyData {
-  id:string;
+  id: string;
   filepath: any;
-  title:string;
-  description:string;
-  created_date:any;
-  uid:string;
+  title: string;
+  description: string;
+  createdDate: any;
+  uid: string;
 }
 @Component({
   selector: 'app-favorites',
@@ -19,25 +19,25 @@ export interface MyData {
   styleUrls: ['./favorites.page.scss'],
 })
 export class FavoritesPage implements OnInit {
-  planners:any[]=[];
-  sub:any;
-  referance:any;
-  currentUser:any;
+  planners: any[]=[];
+  sub: any;
+  referance: any;
+  currentUser: any;
   postsData=false;
-  
+
   userPostsSubscription: Subscription;
   bookmarkedPostsSubscription: Subscription;
   bookmarkedPosts: Post[] = [];
   private plannerCollection: AngularFirestoreCollection<MyData>;
-  constructor(private route: Router,private database: AngularFirestore,private plannerService:PlannerService, private loadingController:LoadingController) {    
+  constructor(private route: Router,private database: AngularFirestore,private plannerService: PlannerService, private loadingController:LoadingController) {
 
    }
 
   ngOnInit() {
   }
-  
+
   ionViewWillEnter(){
-    let currentUser = localStorage.getItem("user");
+    const currentUser = localStorage.getItem('user');
     this.currentUser = JSON.parse(currentUser);
     (async () => {
       this.bookmarkedPostsSubscription = this.plannerService
@@ -45,7 +45,7 @@ export class FavoritesPage implements OnInit {
         .subscribe((posts) => {
           this.postsData=true;
           this.bookmarkedPosts = posts;
-          console.log("bookmarked",this.bookmarkedPosts);
+          console.log('bookmarked',this.bookmarkedPosts);
         });
     })();
   }

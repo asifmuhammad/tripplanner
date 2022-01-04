@@ -34,18 +34,18 @@
     <div class="card">
       <div class="header">
         <div class="avatar">
-          <img *ngIf="currentAccountInfo?.photoURL == ''" src="../../assets/img/player104.png" alt="">
-          <img *ngIf="currentAccountInfo?.photoURL != ''" [src]="currentAccountInfo?.photoURL" alt="">
+          <img *ngIf="currentAccountInfo?.photoURL === ''" src="../../assets/img/player104.png" alt="">
+          <img *ngIf="currentAccountInfo?.photoURL !== ''" [src]="currentAccountInfo?.photoURL" alt="">
         </div>
       </div>
       <div class="card-body">
         <div class="user-meta ion-text-center">
           <h3 class="playername">{{currentAccountInfo?.displayName}}</h3>
           <p>{{currentAccountInfo?.email}}</p>
-          <h6 class="ranking">Favorites: <ion-chip>
+           <h6 class="ranking">Favorites: <ion-chip>
               <ion-label>{{bookmarkedPosts?.length}}</ion-label>
             </ion-chip>
-          </h6>          
+          </h6>
         <ion-button type="button" color="danger" expand="block" (click)="logout()">Logout</ion-button>
         </div>
       </div>
